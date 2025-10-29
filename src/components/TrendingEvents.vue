@@ -7,46 +7,33 @@ export default {
 
   data() {
     return {
-      events: [
-        {
-          title: "ISWIS Live Show",
-          date: "Sun, Oct 3rd • 6pm",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-          image: "/src/assets/images/card-one-image.png",
-          link: "DetailsPage.html",
-        },
-        {
-          title: "Lagos Jazz Festival",
-          date: "Fri, Nov 10th • 8pm",
-          description:
-            "Experience a night of rhythm and melodies at the annual Lagos Jazz Fest. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-          image: "/src/assets/images/card-two.png",
-          link: "DetailsPage.html",
-        },
-        {
-          title: "Art & Culture Expo",
-          date: "Sat, Dec 2nd • 4pm",
-          description:
-            "Discover creativity and culture at the Lagos Art & Culture Expo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-          image: "/src/assets/images/card-three.png",
-          link: "DetailsPage.html",
-        },
-        {
-          title: "Art & Culture Expo",
-          date: "Sat, Dec 2nd • 4pm",
-          description:
-            "Discover creativity and culture at the Lagos Art & Culture Expo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-          image: "/src/assets/images/card-three.png",
-          link: "DetailsPage.html",
-        },
-      ],
+      baseUrl: "https://fakestoreapi.com/products",
+      events: [],
     };
   },
   methods: {
     handleViewEvent(event) {
       this.$emit("event-selected", event);
     },
+    async fetchEvents() {
+      try {
+        const response = await fetch(this.baseUrl);
+        const data = await response.json();
+
+        this.events = data.map((item) => ({
+          id: item.id,
+          title: item.title,
+          description: item.description,
+          image: item.image,
+        }));
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    },
+  },
+
+  mounted() {
+    this.fetchEvents();
   },
 };
 </script>
@@ -67,18 +54,30 @@ export default {
 
     <!-- Card section -->
     <div>
-      <!-- <div class="flex flex-wrap gap-10"> -->
-      <div class="flex gap-10">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6"
+      >
         <EventCard
           v-for="(event, index) in events"
           :key="index"
+          :id="event.id"
+          :title="event.title"
+          :date="event.date"
+          :description="event.description"
+          :image="event.image"
+          :link="event.link"
+        />
+        <!-- <EventCard
+          v-for="(event, index) in events"
+          :key="index"
+          :id="event.id"
           :title="event.title"
           :date="event.date"
           :description="event.description"
           :image="event.image"
           :link="event.link"
           @view-event="handleViewEvent"
-        />
+        /> -->
       </div>
     </div>
   </div>
