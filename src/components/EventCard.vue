@@ -15,8 +15,8 @@ export default {
 </script>
 
 <template>
-  <section class="pt-16">
-    <div class="max-w-sm bg-white rounded-xl shadow-md overflow-hidden">
+  <section>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
       <!-- Image Section -->
       <div class="relative bg-orange-500 h-48 flex items-center justify-center">
         <img :src="image" :alt="title" class="object-cover h-full w-full" />

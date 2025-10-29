@@ -32,6 +32,14 @@ export default {
           image: "/src/assets/images/card-three.png",
           link: "DetailsPage.html",
         },
+        {
+          title: "Art & Culture Expo",
+          date: "Sat, Dec 2nd • 4pm",
+          description:
+            "Discover creativity and culture at the Lagos Art & Culture Expo. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+          image: "/src/assets/images/card-three.png",
+          link: "DetailsPage.html",
+        },
       ],
     };
   },
@@ -44,19 +52,21 @@ export default {
 </script>
 
 <template>
-  <div>
-    <div class="flex flex-row justify-between items-center px-16 pt-4">
+  <div class="px-16">
+    <div class="flex flex-row justify-between items-center py-16">
       <div>
         <h2 class="text-2xl font-bold text-gray-900">Trending events</h2>
       </div>
       <div class="flex items-center cursor-pointer">
-        <p class="text-gray-600 text-sm mr-2">View all trending events</p>
+        <p class="text-gray-600 text-sm mr-2 font-normal">
+          View all trending events
+        </p>
         <img src="../assets/images/Arrow--up-right.png" alt="top arrow" />
       </div>
     </div>
 
     <!-- Card section -->
-    <div class="px-20 pb-16">
+    <div>
       <!-- <div class="flex flex-wrap gap-10"> -->
       <div class="flex gap-10">
         <EventCard

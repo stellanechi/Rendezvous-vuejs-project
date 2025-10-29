@@ -23,7 +23,7 @@ export default {
         <!-- Right Content - Search Box -->
         <div class="w-full max-w-4xl mx-auto">
           <div
-            class="flex items-center bg-white rounded-lg shadow-4xl px-6 py-5 space-x-4"
+            class="flex items-center bg-white rounded-xl shadow-4xl px-6 py-8 space-x-4 gap-4"
           >
             <!-- Search Icon + Input -->
             <div class="flex items-center flex-grow space-x-3">
