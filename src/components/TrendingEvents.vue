@@ -15,16 +15,19 @@ export default {
     handleViewEvent(event) {
       this.$emit("event-selected", event);
     },
-    async fetchEvents() {
+    async fetchEvents(limit = null) {
       try {
         const response = await fetch(this.baseUrl);
         const data = await response.json();
 
-        this.events = data.map((item) => ({
+        // this.events = data.map((item) => ({
+        this.events = (limit ? data.slice(0, limit) : data).map((item) => ({
           id: item.id,
           title: item.title,
           description: item.description,
           image: item.image,
+          price: `$${item.price}`,
+          category: item.category,
         }));
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -33,7 +36,7 @@ export default {
   },
 
   mounted() {
-    this.fetchEvents();
+    this.fetchEvents(6);
   },
 };
 </script>
@@ -55,7 +58,7 @@ export default {
     <!-- Card section -->
     <div>
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
       >
         <EventCard
           v-for="(event, index) in events"

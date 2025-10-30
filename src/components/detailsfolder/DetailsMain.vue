@@ -1,29 +1,62 @@
 <script>
-export default {};
+export default {
+  name: "DetailsMain",
+  data() {
+    return {
+      event: null,
+      baseUrl: "https://fakestoreapi.com/products",
+    };
+  },
+
+  //   mounted() {
+  //     this.event = {
+  //       id: this.$route.params.id,
+  //       title: this.$route.query.title,
+  //       description: this.$route.query.description,
+  //       image: this.$route.query.image,
+  //       price: this.$route.query.price,
+  //       category: this.$route.query.category,
+  //     };
+  //   },
+  async mounted() {
+    const eventId = this.$route.params.id;
+    if (eventId) {
+      try {
+        const response = await fetch(`${this.baseUrl}/${eventId}`);
+        const data = await response.json();
+        this.event = {
+          id: data.id,
+          title: data.title,
+          description: data.description,
+          image: data.image,
+          price: `$${data.price}`,
+          category: data.category,
+        };
+      } catch (error) {
+        console.error("Error fetching event details:", error);
+      }
+    }
+  },
+};
 </script>
 
 <template>
   <div>
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-8">
-      <!-- Event Card -->
       <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-        <!-- Hero Image -->
-        <!-- <div class="relative h-90 bg-gray-200"></div> -->
         <div class="relative h-90 bg-gray-200">
           <img
-            alt="I said what I said Live Show"
-            class="w-full h-full object-cover"
-            id="product-image"
+            :src="event ? event.image : ''"
+            :alt="event ? event.title : ''"
+            class="max-h-full object-contain absolute inset-0 mx-auto my-0 py-8"
           />
         </div>
 
         <!-- Event Details -->
         <div class="p-8">
-          <h1
-            id="product-title"
-            class="text-2xl font-semibold text-gray-900 mb-6"
-          >
+          <h1 class="text-2xl font-semibold text-gray-900 mb-6">
+            {{ event ? event.title : "" }}
             <!-- I said what I said Live Show -->
           </h1>
 
@@ -172,28 +205,15 @@ export default {};
                 Event description
               </h2>
               <div class="leading-relaxed space-y-4">
-                <p id="product-description">
-                  <!-- Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt neque porro quisquam est, qui dolorem ipsum quia
-                  dolor sit amet, consectetur, adipisci velit, sed quia non
-                  numquam eius modi tempora incidunt ut labore et dolore magnam
-                  aliquam. Ut enim ad minima veniam, quis nostrum exercitationem
-                  ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
-                  commodi consequatur. Quis autem vel eum iure reprehenderit qui
-                  in ea voluptate velit esse quam nihil molestiae consequatur,
-                  vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? -->
+                <p class="text-gray-700">
+                  {{ event ? event.description : "" }}
                 </p>
               </div>
 
               <!-- Ticket Pricing Section -->
               <div class="mt-12">
                 <h3 class="text-xl font-bold text-gray-900 mb-6">
-                  Tickets Pricing
+                  Product Pricing
                 </h3>
 
                 <div class="flex flex-col sm:flex-row gap-8 mb-8">
@@ -201,11 +221,8 @@ export default {};
                     <h4 class="text-lg font-semibold text-gray-900 mb-2">
                       Single
                     </h4>
-                    <p
-                      id="product-price"
-                      class="text-2xl font-bold text-custom-purple"
-                    >
-                      <!-- NGN 5,000 -->
+                    <p class="text-2xl font-bold text-custom-purple">
+                      {{ event ? event.price : "" }}
                     </p>
                   </div>
                   <div class="flex-1">

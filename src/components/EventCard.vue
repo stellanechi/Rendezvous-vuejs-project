@@ -8,6 +8,7 @@ export default {
     description: String,
     image: String,
     link: String,
+    price: String,
   },
   data() {
     return {};
@@ -17,13 +18,14 @@ export default {
       this.$router.push({
         name: "details",
         params: { id: this.id },
-        query: {
-          title: this.title,
-          date: this.date,
-          description: this.description,
-          image: this.image,
-          link: this.link,
-        },
+        // query: {
+        //   title: this.title,
+        //   date: this.date,
+        //   description: this.description,
+        //   image: this.image,
+        //   link: this.link,
+        //   price: this.price,
+        // },
       });
     },
   },
@@ -35,7 +37,7 @@ export default {
     <div class="bg-white rounded-xl shadow-md overflow-hidden">
       <!-- Image Section -->
       <div
-        class="relative bg-gray-100 h-56 flex items-center justify-center pt-4"
+        class="relative bg-gray-100 h-46 flex items-center justify-center pt-4"
       >
         <img :src="image" :alt="title" class="max-h-full object-contain" />
       </div>
