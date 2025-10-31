@@ -14,19 +14,26 @@ export default {
     return {};
   },
   methods: {
+    // goToDetails() {
+    //   this.$router.push({
+    //     name: "details",
+    //     params: { id: this.id },
+    //   });
+    // },
     goToDetails() {
-      this.$router.push({
-        name: "details",
-        params: { id: this.id },
-        // query: {
-        //   title: this.title,
-        //   date: this.date,
-        //   description: this.description,
-        //   image: this.image,
-        //   link: this.link,
-        //   price: this.price,
-        // },
+      // Smooth scroll to top before navigating
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
       });
+
+      // Delay slightly so scroll starts before route change
+      setTimeout(() => {
+        this.$router.push({
+          name: "details",
+          params: { id: this.id },
+        });
+      }, 300);
     },
   },
 };
@@ -55,14 +62,7 @@ export default {
           >
             View details
           </button>
-          <!-- <button
-            class="inline-block text-sm font-medium text-indigo-600 hover:underline cursor-pointer"
-            @click="
-              $emit('view-event', { title, date, description, image, link })
-            "
-          >
-            View details
-          </button> -->
+
           <!-- <router-link
             :to="{
               name: 'details',
