@@ -21,13 +21,11 @@ export default {
     //   });
     // },
     goToDetails() {
-      // Smooth scroll to top before navigating
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       });
 
-      // Delay slightly so scroll starts before route change
       setTimeout(() => {
         this.$router.push({
           name: "details",
