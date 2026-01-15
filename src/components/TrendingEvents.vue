@@ -70,17 +70,6 @@ export default {
           :image="event.image"
           :link="event.link"
         />
-        <!-- <EventCard
-          v-for="(event, index) in events"
-          :key="index"
-          :id="event.id"
-          :title="event.title"
-          :date="event.date"
-          :description="event.description"
-          :image="event.image"
-          :link="event.link"
-          @view-event="handleViewEvent"
-        /> -->
       </div>
     </div>
   </div>
